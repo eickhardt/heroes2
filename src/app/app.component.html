@@ -1,20 +1,140 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<section class="hero is-primary is-medium">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1">
+        Regnskab
+      </h1>
+      <h2 class="subtitle">
+        Styr på det
+      </h2>
+    </div>
+  </div>
+</section>
 
+<form #entry="ngForm" class="control">
+  <section class="section">
+    <div class="container">
+      <div class="columns is-12">
+
+        <div class="column">
+          
+          <div class="field">
+            <label class="label">Entry name</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" 
+              name="entryname" 
+               [(ngModel)]="entryName" 
+               [ngClass]="{'is-success': entryName}" 
+               type="text" 
+               placeholder="Input the name of your entry">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check"></i>
+              </span>
+            </div>
+            <p class="help is-success" *ngIf="entryName">
+              Input is valid
+            </p>
+          </div>
+          
+          <div class="columns is-mobile">
+            
+            <div class="column is-6">
+              
+              <div class="field">
+                <label class="label">Category</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select [(ngModel)]="category" name="category">
+                      <option>-</option>
+                      <option>Hobby</option>
+                      <option>Food</option>
+                      <option>Going out</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            <div class="column is-6">
+              
+              <div class="field">
+                <label class="label">Sub-category</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select [(ngModel)]="subcategory" name="subcategory" [disabled]="!category">
+                      <option>-</option>
+                      <option>Food</option>
+                      <option>Going out</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+          
+        </div>
+
+        <div class="column">
+          <div class="field">
+            <label class="label">Account</label>
+            <div class="control">
+              <div class="select is-fullwidth">
+                <select [disabled]="!category">
+                  <option>Food</option>
+                  <option>Going out</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="columns is-mobile">
+        <div class="column">
+          <label class="label">Date</label>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+
+              <input class="input" 
+               placeholder="Select a date" 
+               ngx-mydatepicker 
+               name="dateModel" 
+               [(ngModel)]="dateModel"
+               [options]="dateOptions" 
+               #dp="ngx-mydatepicker" 
+               (dateChanged)="onDateChanged($event)" />
+            </div>
+      
+            <div class="control">
+              <button class="button is-primary"
+               (click)="dp.toggleCalendar()">
+                Choose
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="columns is-12">
+        <div class="column">
+          <button class="button is-primary is-fullwidth"
+           [disabled]="!category">
+            Add entry
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+        
